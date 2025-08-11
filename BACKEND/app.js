@@ -16,12 +16,31 @@ dotenv.config("./.env");
 
 const app = express();
 
-app.use(
-  cors({
-    origin: ["https://url-shortner-frontend-ruby.vercel.app"], // your React app
-    credentials: true, // 👈 this allows cookies to be sent
-  })
-);
+// app.use(
+//   cors({
+//     origin: ["https://url-shortner-frontend-ruby.vercel.app"], // your React app
+//     credentials: true, // 👈 this allows cookies to be sent
+//   })
+// );
+
+const allowedOrigins = [
+  "http://localhost:5173",           // for local dev
+  "https://url-shortner-frontend-ruby.vercel.app" // replace with your actual deployed frontend URL
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps or Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = `CORS policy does not allow access from origin ${origin}`;
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true,
+}));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
