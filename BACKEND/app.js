@@ -19,7 +19,6 @@ const app = express();
 app.use(
   cors({
     origin: ["https://url-shortner-frontend-ruby.vercel.app"], // your React app
-    methods: ["GET", "POST"],
     credentials: true, // 👈 this allows cookies to be sent
   })
 );
