@@ -12,7 +12,7 @@ import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 
-dotenv.config("./.env");
+dotenv.config();
 
 const app = express();
 
@@ -46,8 +46,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGO_URI);
-
 app.use(attachUser);
 
 app.use("/api/user", user_routes);
@@ -55,11 +53,28 @@ app.use("/api/auth", auth_routes);
 app.use("/api/create", short_url);
 app.get("/:id", redirectFromShortUrl);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
+
+
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  connectDB();
-  console.log("Server is running on http://localhost:3000");
+const startServer = async () => {
+  try {
+    await connectDB();  // This calls mongoose.connect internally
+    app.listen(process.env.PORT || 3000, () => {
+      console.log("Server running...");
+    });
+  } catch (error) {
+    console.error("Failed to connect to DB", error);
+  }
+};
+
+startServer();
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`Server running on port ${process.env.PORT || 3000}`);
 });
 
 // GET - Redirection
