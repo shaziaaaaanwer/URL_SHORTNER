@@ -97,12 +97,12 @@ const UserUrl = () => {
                   </td>
                   <td className="px-6 py-4">
                     <a
-                      href={`https://short-u/${url.short_url}`}
+                      href={`https://url-shortner-api-beryl.vercel.app/${url.short_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 hover:underline"
                     >
-                      {`https://short-u/${url.short_url}`}
+                      {`https://url-shortner-api-beryl.vercel.app/${url.short_url}`}
                     </a>
                   </td>
                   <td className="px-6 py-4">
@@ -114,7 +114,7 @@ const UserUrl = () => {
                     <button
                       onClick={() =>
                         handleCopy(
-                          `https://short-u/${url.short_url}`,
+                          `https://url-shortner-api-beryl.vercel.app/${url.short_url}`,
                           url._id
                         )
                       }
