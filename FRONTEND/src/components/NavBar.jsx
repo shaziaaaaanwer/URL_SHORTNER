@@ -32,11 +32,11 @@ const Navbar = () => {
           <div className="flex items-center">
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
-                {user?.name && (
+{/*                 {user?.name && (
                   <span className="hidden sm:inline text-gray-600 text-sm">
                     Hi, <span className="font-semibold">{user.name}</span>
                   </span>
-                )}
+                )} */}
                 <button
                   onClick={handleLogout}
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-all"
