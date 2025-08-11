@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosInstance = axios.create({
-    baseURL:"url-shortner-api-beryl.vercel.app",
+    baseURL:"https://url-shortner-api-beryl.vercel.app/",
     timeout:10000, //10s
     withCredentials:true
 })
